@@ -1,0 +1,6 @@
+type ExampleEntity @entity {
+  id: ID!
+  count: BigInt!
+  customerAddress: Bytes! # address
+  incomingEthereum: BigInt! # uint256
+}

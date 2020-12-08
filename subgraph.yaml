@@ -1,0 +1,35 @@
+specVersion: 0.0.1
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: Contract
+    network: mainnet
+    source:
+      address: "0xB3775fB83F7D12A36E0475aBdD1FCA35c091efBe"
+      abi: Contract
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.2
+      language: wasm/assemblyscript
+      entities:
+        - onTokenPurchase
+        - onTokenSell
+        - onReinvestment
+        - onWithdraw
+        - Transfer
+      abis:
+        - name: Contract
+          file: ./abis/Contract.json
+      eventHandlers:
+        - event: onTokenPurchase(indexed address,uint256,uint256,indexed address)
+          handler: handleonTokenPurchase
+        - event: onTokenSell(indexed address,uint256,uint256)
+          handler: handleonTokenSell
+        - event: onReinvestment(indexed address,uint256,uint256)
+          handler: handleonReinvestment
+        - event: onWithdraw(indexed address,uint256)
+          handler: handleonWithdraw
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping.ts
